@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Documents/org.json.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/json-simple-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/jquery-1.9.1.jar/jquery-1.9.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/spring-json-1.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/jackson-databind-2.1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/jackson-annotations-2.1.2.jar/jackson-annotations-2.1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/user.FULL305-WIN/Desktop/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.9.34/appengine-java-sdk-1.9.34/lib/opt/user/datanucleus/v2/jta-1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/user.FULL305-WIN/Desktop/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.9.34/appengine-java-sdk-1.9.34/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/com.fasterxml.jackson.core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/com.fasterxml.jackson.databind.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/jackson-core-2.0.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/appengine-api-labs-1.6.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Documents/Spring_Capsule/gson-2.6.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Documents/Spring_Capsule/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring4.1.4"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-android-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-appengine-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-gson-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-jackson2-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-java6-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-protobuf-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-servlet-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-api-client-xml-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-android-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-appengine-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-gson-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-jackson-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-jackson2-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-jdo-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-protobuf-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-http-client-xml-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-oauth-client-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-oauth-client-appengine-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-oauth-client-java6-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-oauth-client-jetty-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/google-oauth-client-servlet-1.22.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/gson-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/guava-jdk5-17.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/httpclient-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/httpcore-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/jackson-core-2.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/jackson-core-asl-1.9.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/jdo2-api-2.3-eb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/jetty-6.1.26.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/jetty-util-6.1.26.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/jsr305-1.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/protobuf-java-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/transaction-api-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-client-assembly-1.22.0-1.22.0/google-api-java-client/libs/xpp3-1.1.4c.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
