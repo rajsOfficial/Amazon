@@ -117,14 +117,6 @@ function signOut() {
  function signOut(){
 	 module.gsignOut();
  }
-/* 
-	 function logout(){
-		 var auth2 = gapi.auth2.getAuthInstance();
-		  auth2.signOut().then(function () {
-		    console.log('User signed out.');
-		    window.location.href="logout.jsp";
-		  });
-	 } */
 </script><div align="center" style="display:none"><div class="g-signin2" data-onsuccess="onSignIn"></div></div>
 
 <div id="card" style= "display:none;" class="container">

@@ -97,9 +97,11 @@ var productValues = 0;
 var details = function(url){
  	this.method = "post";
  	this.Url = url;
- }
-details.prototype.ajax= function(data){
-	 $.ajax({
+ };
+ 
+details.prototype = {
+	ajax : function(data){
+	$.ajax({
 			url: this.Url,
 			type :this.method,
 			headers : {
@@ -116,9 +118,9 @@ details.prototype.ajax= function(data){
 			  alert('Error while request..');
 			}
 		});
-}
+	},
 
-function deliveryOut(){
+   deliveryOut : function(){
 		var mobileNum = $('#phNumber').val();
 		var addr = $('#address').val();
 		if(mobileNum >= 1000000000 && mobileNum>999999999){
@@ -135,87 +137,90 @@ function deliveryOut(){
 		else {
 			alert("Enter a Valid Mobile Number");
 		}
-	 }
-	 
-function signOut() {
+	 },
+
+   run : function(){
+	    var cell, row, table;
+	    table = document.createElement('table');
+	    table.setAttribute('align','center');
+	    table.style.width= '60%';
+	    table.style.cellpadding ="19px";
+	    row = table.insertRow(0); 
+	    row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "Type";
+	    row.insertCell(1).innerHTML = "Description";
+	    
+	    row = table.insertRow(1); row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "ProductName";
+	    row.insertCell(1).innerHTML = productValues.productname;
+	    
+	    row = table.insertRow(2); row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "Price";
+	    row.insertCell(1).innerHTML = productValues.price;
+	    
+	    row = table.insertRow(3); row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "Quantity";
+	  
+	    var x = document.createElement("SELECT");
+	    x.setAttribute("id", "mySelect");
+	    for(n=1; n<=productValues.quantity;n++){
+	    var z = document.createElement("option");
+	    z.setAttribute("value", n);
+	    var t = document.createTextNode(n);
+	    z.appendChild(t);
+	    x.appendChild(z);
+
+	    }
+	    row.insertCell(1).appendChild(x);
+	    
+	    row = table.insertRow(4); row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "Discount";
+	    row.insertCell(1).innerHTML = productValues.discount+"%";
+	    
+	    row = table.insertRow(5); row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "Mobile";
+	    var input = document.createElement("input");
+	    input.setAttribute("type","number");
+	    input.setAttribute("id","phNumber");
+	    input.required=true;
+	    row.insertCell(1).appendChild(input);
+	    
+	   	row = table.insertRow(6); row.setAttribute('align','center');
+	    row.insertCell(0).innerHTML = "Address";
+	    var addrBox =  document.createElement("textarea");
+	    addrBox.setAttribute("id","address");
+	    addrBox.setAttribute("required","");
+	    row.insertCell(1).appendChild(addrBox);
+	    
+	    var br =document.createElement("BR");
+	    var add= document.getElementById("addtable");
+	    add.setAttribute("align","center");
+	    add.appendChild(table);
+	  	var btn = document.createElement("Button");
+	   	btn.setAttribute("class","btn btn-primary");
+	   	btn.innerHTML="Buy";
+		   	btn.onclick= function(){deliveryOut();};
+		   	
+	   	add.appendChild(btn);
+	 	add.appendChild(br);
+	 	add.appendChild(br);
+	 },
+	
+   signOut : function() {
 	      var auth2 = gapi.auth2.getAuthInstance();
 	      auth2.signOut().then(function () {
 	        console.log('User signed out.');
 	        window.location.href="logout.jsp";
 	      });
 	    }
+}    
 	    
-	    
-var deliveryDetails = new details("deliveryPage");
-deliveryDetails.ajax("");
+var deliveryDetails = new details();
+deliveryDetails.ajax("","deliveryPage");
 
-
-function run(){
-    var cell, row, table;
-    table = document.createElement('table');
-    table.setAttribute('align','center');
-    table.style.width= '60%';
-    table.style.cellpadding ="19px";
-    row = table.insertRow(0); 
-    row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "Type";
-    row.insertCell(1).innerHTML = "Description";
-    
-    row = table.insertRow(1); row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "ProductName";
-    row.insertCell(1).innerHTML = productValues.productname;
-    
-    row = table.insertRow(2); row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "Price";
-    row.insertCell(1).innerHTML = productValues.price;
-    
-    row = table.insertRow(3); row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "Quantity";
-  
-    var x = document.createElement("SELECT");
-    x.setAttribute("id", "mySelect");
-    for(n=1; n<=productValues.quantity;n++){
-    var z = document.createElement("option");
-    z.setAttribute("value", n);
-    var t = document.createTextNode(n);
-    z.appendChild(t);
-    x.appendChild(z);
-
-    }
-    row.insertCell(1).appendChild(x);
-    
-    row = table.insertRow(4); row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "Discount";
-    row.insertCell(1).innerHTML = productValues.discount+"%";
-    
-    row = table.insertRow(5); row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "Mobile";
-    var input = document.createElement("input");
-    input.setAttribute("type","number");
-    input.setAttribute("id","phNumber");
-    input.required=true;
-    row.insertCell(1).appendChild(input);
-    
-   	row = table.insertRow(6); row.setAttribute('align','center');
-    row.insertCell(0).innerHTML = "Address";
-    var addrBox =  document.createElement("textarea");
-    addrBox.setAttribute("id","address");
-    addrBox.setAttribute("required","");
-    row.insertCell(1).appendChild(addrBox);
-    
-    var br =document.createElement("BR");
-    var add= document.getElementById("addtable");
-    add.setAttribute("align","center");
-    add.appendChild(table);
-  	var btn = document.createElement("Button");
-   	btn.setAttribute("class","btn btn-primary");
-   	btn.innerHTML="Buy";
-	   	btn.onclick= function(){deliveryOut();};
-	   	
-   	add.appendChild(btn);
- 	add.appendChild(br);
- 	add.appendChild(br);
-    
+function gSignOut(){
+	var signOutObj = new authenticate():
+		signOutObj.signOut();
 }
 
 </script>

@@ -99,46 +99,45 @@ response.setHeader("Expires", "0");
 </div>
 
 <script>
-var module = (function(){
-function validation(){
-		var pName = $('#productName').val();
-		var price = $('#price').val();
-		var quan = $('#quantity').val();
-		var disc = $('#discount').val();
-		
-		if(price<10000000 && quan<100000 && disc<100){
+var ajax_Call = {
+		validation : function (){
+			var pName = $('#productName').val();
+			var price = $('#price').val();
+			var quan = $('#quantity').val();
+			var disc = $('#discount').val();
 			
-			var xhr = new XMLHttpRequest();
-			var url = "proposal";
-			xhr.open("POST", url, true);
-			xhr.setRequestHeader("Content-type", "application/json");
-			xhr.onreadystatechange = function() {
-				 if (xhr.readyState == 4 && xhr.status == 200) {
-					alert("Send to Admin for Approval");
+			if(price<10000000 && quan<100000 && disc<100){
+				
+				var xhr = new XMLHttpRequest();
+				var url = "proposal";
+				xhr.open("POST", url, true);
+				xhr.setRequestHeader("Content-type", "application/json");
+				xhr.onreadystatechange = function() {
+					 if (xhr.readyState == 4 && xhr.status == 200) {
+						alert("Send to Admin for Approval");
+					}
+					else{
+						alert('Send to Admin for Approval');
+					}
 				}
-				else{
-					alert('Send to Admin for Approval');
-				}
-			}
-			var obj = {
-					"productName" : pName,
-					"price" : price,
-					"quantity" : quan,
-					"discount" : disc	};
-			var data = JSON.stringify(obj);
-			xhr.send(data);
-}
-else{
-	alert("Please Provide Valid Details");
-}
-}
-return {
-	validate : validation
-}
-})();
+				var obj = {
+						"productName" : pName,
+						"price" : price,
+						"quantity" : quan,
+						"discount" : disc	};
+				var data = JSON.stringify(obj);
+				xhr.send(data);
+	}
+	else{
+		alert("Please Provide Valid Details");
+	}
+		}
+};
+
 $(document).ready(function(){
 	$("#proposalbut").click(function(){
-	module.validate();
+	var dataObj  = new ajax_Call;
+	ajax_Call.validate();
 	});
 });
 </script>

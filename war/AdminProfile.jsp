@@ -45,14 +45,15 @@
 <script type="text/javascript">
 	
 	var productValues = 0;
-var adminObj = function(url){
-	this.Url = url;
+var authenticate = function(){
+	this.method = "get";
 }
 
-adminObj.prototype.ajax = function(obj){
-	console.log(obj);
+authenticate.prototype ={
+	
+	ajax :  function(obj,Url){
 	  $.ajax({
-			url: this.Url,
+			url: Url,
 			type :"get",
 			headers : {
 				'Accept':'Application/json',
@@ -61,19 +62,15 @@ adminObj.prototype.ajax = function(obj){
 			data : "jsonObj="+JSON.stringify(obj),
 			success : function(response) {
            				productValues = response;
-						run();
+						authenticate.prototype.run();
 			},
 			error : function() {
 			  alert('Error while request..');
 			}
 		});
-	 }
-	 
-	 var data = new adminObj("AdminProfile");
-	 data.ajax("");
-	 
-	 
-		 function run(){	
+	 },
+	
+	 run : function(){	
 			 if(typeof productValues.obj1 === "undefined"){
 				var h3 = document.createElement('h3');
 				var t1 =document.createTextNode("Nothing to display");
@@ -120,7 +117,7 @@ adminObj.prototype.ajax = function(obj){
             	   	acceptBtn.innerHTML="Accept";
             	   	acceptBtn.setAttribute("id","acceptId");
             	   	acceptBtn.setAttribute("value",value.id);
-         	 	   	acceptBtn.addEventListener("click",function(){accept(value.id);});
+         	 	   	acceptBtn.addEventListener("click",function(){authenticate.prototype.accept(value.id);});
          	 	   	
             	   	add.appendChild(acceptBtn);
             		var rejectBtn = document.createElement("Button");
@@ -128,7 +125,7 @@ adminObj.prototype.ajax = function(obj){
             	   	rejectBtn.innerHTML="Reject";
             	   	rejectBtn.setAttribute("id","rejectId");
             	   	rejectBtn.setAttribute("value",value.id);
-         	 	   	rejectBtn.addEventListener("click",function(){reject(value.id);});
+         	 	   	rejectBtn.addEventListener("click",function(){authenticate.prototype.reject(value.id);});
          	 	   	
             	   	add.appendChild(rejectBtn);
             	   	var div =document.createElement("div");
@@ -138,36 +135,38 @@ adminObj.prototype.ajax = function(obj){
 
 	  	  });
 		 }
-		 }
+		 },
 		 
-		 function accept(number){
+		 accept :  function(number){
 			 var obj={"identity": number };
-			 var acpt = new adminObj("datastoreAdd"); 
-			 acpt.ajax(obj);
+			 authenticate.prototype.ajax(obj,"datastoreAdd");
 			 alert("successfully added");
 			 window.location.href="AdminProfile.jsp";
-		 }
+		 },
 		 
-		 function reject(number){
+		 reject : function(number){
 			 var obj={"identity": number };
-			 var rjct = new adminObj("deleteProposal"); 
-			 rjct.ajax(obj);
+		     authenticate.prototype.ajax(obj,"deleteProposal");
 			 alert("Removed successfully ");
 			 window.location.href="AdminProfile.jsp";
-		 }
+		 },
 		 
-		function rejectAll(){
-		var rjctAll = new adminObj("taskReject");
-		rjctAll.ajax("");
-		alert("success");
-		window.location.href="AdminProfile.jsp";
+	 rejectAll : function(){
+			authenticate.prototype.ajax("","taskReject");
+			alert("success");
+			window.location.href="AdminProfile.jsp";
 		}
-	
+}
 	$(document).ready(function(){
 	$("#rejectAll").click(function(){
-	rejectall();
+			var clear = new authenticate();
+			clear.rejectAll();
 	});  });
-	
+
+var data = new authenticate("AdminProfile");
+data.ajax("");
+
+
 </script><br>
  
 </html>

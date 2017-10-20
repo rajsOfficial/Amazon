@@ -84,37 +84,45 @@ response.setHeader("Expires", "0");
 <br><br><br><br>
 <div class="col-lg-9 col-sm-12 right">
 <h2 align="center">Welcome</h2><br>
+<div id="addtable" align="center">
+ <h3 id="show"></h3></div>
+ </div>
 <script type="text/javascript">
-	var module = (function(){
-		
-	var productValues = 0;
+var productValues = 0;
+var authenticate = function(url){
+	this.Url = url ;
+}
+
+authenticate.prototype = {
 	
-	function profile_call(){
+	ajax : function(data,Url){
 	  $.ajax({
-			url: "/UserProfile",
+			url: Url,
 			type :"POST",
 			headers : {
 				'Accept':'Application/json',
-				'Content-Type' : 'Text/Plain'
+				'Content-Type' :'Application/json'
 			},
-			data : "",
-			contentType : "Text/plain",
+			data : data,
 			success : function(response) {
-				if(response){
    				productValues = response;
-				run();
-				}	
-				else {
-					document.getElementById("show").innerHTML="Nothing to display";
-				}
-			},
+				authenticate.prototype.run();
+				},
 			error : function() {
 			  alert('Error while request..');
 			}
 		});
-	}
-		 function run(){
-			 
+	},
+	
+	run : function(){
+			  if(typeof productValues.obj1 === "undefined"){
+					var h3 = document.createElement('h3');
+					var t1 =document.createTextNode("Nothing to display");
+					h3.appendChild(t1);
+					h3.setAttribute("align","center");
+					document.getElementById("addtable").appendChild(h3);
+				}
+			  else {
 	         $.each(productValues, function (index, value) {
 		            var row, table;
             	    table = document.createElement('table');
@@ -156,7 +164,7 @@ response.setHeader("Expires", "0");
             	   	btn.innerHTML="Add to Cart";
             	   	btn.setAttribute("value",value.id);
             	   	btn.setAttribute("id","btn");
-            	   	btn.addEventListener("click",function(){validation(value.id);});
+            	   	btn.addEventListener("click",function(){authenticate.prototype.validation(value.id);});
             	   	
             	   	add.appendChild(btn);
             	   	var div =document.createElement("div");
@@ -164,69 +172,16 @@ response.setHeader("Expires", "0");
             	   	div.appendChild(linebreak);
 					add.appendChild(div);
 	  	  });
-		 }
+	         }
+		 },
 		 
-		function validation(number){
+	validation : function(number){
 			 var obj={"identity": number };
-			 $.ajax({
-				 type:"Get",
-				 url: "cartAdd",
-					headers : {
-						'Accept':'Text/Plain',
-						'Content-Type' : 'Application/json'
-					},
-					data : "jsonObj="+JSON.stringify(obj),
-					success : function(response) {
-						alert("Added to Cart ");
-					},
-					error : function() {
-					  alert('Error while request..');
-					}
-
-			 });
-		 }
+			 var data =JSON.stringify(obj);
+			 authenticate.prototype.ajax(data,"cartAdd");			 
+			 alert("Added to Cart ");
+		 },
 		
-		/* 
-		$("#aboutButton").click(function about(){
-			 var obj={"identity": number };
-			 $.ajax({
-				 type:"Get",
-				 url: "/about",
-					headers : {
-						'Accept':'Text/Plain',
-						'Content-Type' : 'Application/json'
-					},
-					data : "",
-					contentType : "Text/plain",
-					success : function(response) {
-						  var row, table;
-		            	    table = document.createElement('table');
-		            	    table.setAttribute('align','center');
-		            	    table.style.width= '30%';
-		            	    table.style.cellpadding ="12px";
-		            	    
-		            	    row = table.insertRow(1); row.setAttribute('align','center');
-		            	    row.insertCell(0).innerHTML = "FirstName";
-		            	    row.insertCell(1).innerHTML = response.obj.firstname;
-		            	    
-		            	    row = table.insertRow(2); row.setAttribute('align','center');
-		            	    row.insertCell(0).innerHTML = "LastName";
-		            	    row.insertCell(1).innerHTML = response.obj.lastname;
-		            	    
-		            	    row = table.insertRow(3); row.setAttribute('align','center');
-		            	    row.insertCell(0).innerHTML = "Mobile";
-		            	    row.insertCell(1).innerHTML = response.obj.number;
-		            	    var add= document.getElementById("about");
-		            	    add.setAttribute("align","center");
-		            	    add.appendChild(table);
-						
-					},
-					error : function() {
-					  alert('Error while request..');
-					}
-
-			 });
-		 }); */
 		    function signOut() {
 		      var auth2 = gapi.auth2.getAuthInstance();
 		      auth2.signOut().then(function () {
@@ -235,19 +190,14 @@ response.setHeader("Expires", "0");
 		      });
 		    }
 	
-		 return {
-		 	profile_ajax : profile_call,
-		 	signout : signOut
-		 }; 
-	}) ();
 
-	module.profile_ajax();
+	
 	function gSignOut(){
-	module.signout();
+	var signoutObj = new authenticate();
+	signoutObj.signOut();
 	}
+	
+	var userObj = new authenticate();
+	userObj.ajax("","UserProfile");
 </script>
-			<div id="addtable" align="center">
- <h3 id="show"></h3></div>
- </div>
- 
-				</html>
+</html>

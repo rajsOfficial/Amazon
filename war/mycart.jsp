@@ -77,122 +77,126 @@ response.setHeader("Expires", "0");
 <script type="text/javascript">
 var productValues = 0;
 
-var cart = function(url){ 
-	this.Url = url;
+var cart = function(){ 
+	this.method = "get";
 }
-cart.prototype.ajax=function(obj){
-	$.ajax({
-		url: this.Url,
-		type :"Get",
-		headers : {
-			'Accept':'Application/json',
-			'Content-Type' : 'Application/json'
-		},
-		data :  "jsonObj="+JSON.stringify(obj),
-		success : function(response) {
-			productValues= response;
-			run();
-		},
-		error : function() {
-		  alert('Error while request..');
-		}
-	});
-}
+cart.prototype ={
+	ajax : function(obj,Url){
+		console.log("into ajax call");
+		
+		$.ajax({
+			url: Url,
+			type :"Get",
+			headers : {
+				'Accept':'Application/json',
+				'Content-Type' : 'Application/json'
+			},
+			data :  "jsonObj="+JSON.stringify(obj),
+			success : function(response) {
+				productValues= response;
+				console.log(productValues);
+				cart.prototype.run();
+			},
+			error : function() {
+			  alert('Error while request..');
+			}
+		});
+	},
+	remove : function(number){
+		console.log("into the remove");
+		 var obj={"identity": number };
+		 this.ajax(obj,"Cartremove");
+		 alert("Removed Successfully");
+		 window.location.href="mycart.jsp";
+	},
 
-function call(){
-		 var cartDetails = new cart("myCart");
-		 cartDetails.ajax("");
+	delivery : function(number){
+		console.log("into delivery method");
+		 var obj={"identity": number };
+		 this.ajax(obj,"delivery");
+		 window.location.href="delivery.jsp";
+	},
+
+	run : function(){
+		console.log("into run");
+				var count=1;
+				if(typeof productValues.obj1 === "undefined"){
+					var h3 = document.createElement('h3');
+					var t1 =document.createTextNode("Nothing to display");
+					h3.appendChild(t1);
+					h3.setAttribute("align","center");
+					document.getElementById("addtable").appendChild(h3);
+				}
+				else{
+		         $.each(productValues, function (index, value) {
+			            var cell, row, table;
+	            	    table = document.createElement('table');
+	            	    table.setAttribute('align','center');
+	            	    table.style.width= '60%';
+	            	    table.style.cellpadding ="19px";
+	            	    
+	            	    table.setAttribute("class","table table-bordered");
+	            	    row = table.insertRow(0); 
+	            	    row.setAttribute('align','center');
+	            	    var x= row.insertCell(0);x.innerHTML = "Type";
+	            	    x.style.color="white";
+	            	   	var y= row.insertCell(1);
+	            	   	y.innerHTML = "Description";
+	            	    y.style.color="white";
+	            	    row.style.backgroundColor ="#006064";
+	            	    row = table.insertRow(1); row.setAttribute('align','center');
+	            	    var prod=  row.insertCell(0); prod.innerHTML = "ProductName";
+	            	    prod.setAttribute("value",value.id);
+	            	    prod.setAttribute("id","nn");
+	            	    row.insertCell(1).innerHTML = value.productname;
+	            	    
+	            	    row = table.insertRow(2); row.setAttribute('align','center');
+	            	    row.insertCell(0).innerHTML = "Price";
+	            	    row.insertCell(1).innerHTML = value.price;
+	            	    
+	            	    row = table.insertRow(3); row.setAttribute('align','center');
+	            	    row.insertCell(0).innerHTML = "Quantity";
+	            	    row.insertCell(1).innerHTML = value.quantity;
+	            	    
+	            	    row = table.insertRow(4); row.setAttribute('align','center');
+	            	    row.insertCell(0).innerHTML = "Discount";
+	            	    row.insertCell(1).innerHTML = value.discount;
+	            	    var br =document.createElement("br");
+	            	    var add= document.getElementById("addtable");
+	            	    add.setAttribute("align","center");
+	            	    add.appendChild(br);
+	            	 	add.appendChild(br);
+	            	    add.appendChild(table);
+	            	  	var buyBtn = document.createElement("Button");
+	            	   	buyBtn.setAttribute("class","btn btn-primary");
+	            	   	buyBtn.innerHTML="Buy";
+	            	   	buyBtn.setAttribute("value",count);
+	            	   	buyBtn.setAttribute("id","deliveryBtn");
+	         	 	   	buyBtn.addEventListener("click",function(){ cart.prototype.delivery(value.id);});
+	            	   	add.appendChild(buyBtn);
+	            	   	
+	            	   	var removeBtn = document.createElement("Button");
+	            	   	removeBtn.setAttribute("class","btn btn-primary");
+	            	   	removeBtn.innerHTML="remove";
+	            	   	removeBtn.setAttribute("id","removeBtn");
+	            	   	removeBtn.setAttribute("value",count);
+	         	 	   	removeBtn.addEventListener("click",function(){cart.prototype.remove(value.id);});
+	            	   	add.appendChild(removeBtn);
+	            	   	var div =document.createElement("div");
+	            	   	var linebreak= document.createElement("br");
+	            	   	div.appendChild(linebreak);
+						add.appendChild(div);
+						count++;
+		  	  });
+			 }
+			 }
+	}
+	function call(){
+		console.log("into call function");
+		 var cartDetails = new cart();
+		 cartDetails.ajax("","myCart");
 }
 		
-		 function run(){
-			var count=1;
-			if(typeof productValues.obj1 === "undefined"){
-				var h3 = document.createElement('h3');
-				var t1 =document.createTextNode("Nothing to display");
-				h3.appendChild(t1);
-				h3.setAttribute("align","center");
-				document.getElementById("addtable").appendChild(h3);
-			}
-			else{
-	         $.each(productValues, function (index, value) {
-		            var cell, row, table;
-            	    table = document.createElement('table');
-            	    table.setAttribute('align','center');
-            	    table.style.width= '60%';
-            	    table.style.cellpadding ="19px";
-            	    
-            	    table.setAttribute("class","table table-bordered");
-            	    row = table.insertRow(0); 
-            	    row.setAttribute('align','center');
-            	    var x= row.insertCell(0);x.innerHTML = "Type";
-            	    x.style.color="white";
-            	   	var y= row.insertCell(1);
-            	   	y.innerHTML = "Description";
-            	    y.style.color="white";
-            	    row.style.backgroundColor ="#006064";
-            	    row = table.insertRow(1); row.setAttribute('align','center');
-            	    var prod=  row.insertCell(0); prod.innerHTML = "ProductName";
-            	    prod.setAttribute("value",value.id);
-            	    prod.setAttribute("id","nn");
-            	    row.insertCell(1).innerHTML = value.productname;
-            	    
-            	    row = table.insertRow(2); row.setAttribute('align','center');
-            	    row.insertCell(0).innerHTML = "Price";
-            	    row.insertCell(1).innerHTML = value.price;
-            	    
-            	    row = table.insertRow(3); row.setAttribute('align','center');
-            	    row.insertCell(0).innerHTML = "Quantity";
-            	    row.insertCell(1).innerHTML = value.quantity;
-            	    
-            	    row = table.insertRow(4); row.setAttribute('align','center');
-            	    row.insertCell(0).innerHTML = "Discount";
-            	    row.insertCell(1).innerHTML = value.discount;
-            	    var br =document.createElement("br");
-            	    var add= document.getElementById("addtable");
-            	    add.setAttribute("align","center");
-            	    add.appendChild(br);
-            	 	add.appendChild(br);
-            	    add.appendChild(table);
-            	  	var buyBtn = document.createElement("Button");
-            	   	buyBtn.setAttribute("class","btn btn-primary");
-            	   	buyBtn.innerHTML="Buy";
-            	   	buyBtn.setAttribute("value",count);
-            	   	buyBtn.setAttribute("id","deliveryBtn");
-         	 	   	buyBtn.addEventListener("click",function(){delivery(value.id);});
-            	   	add.appendChild(buyBtn);
-            	   	
-            	   	var removeBtn = document.createElement("Button");
-            	   	removeBtn.setAttribute("class","btn btn-primary");
-            	   	removeBtn.innerHTML="remove";
-            	   	removeBtn.setAttribute("id","removeBtn");
-            	   	removeBtn.setAttribute("value",count);
-         	 	   	removeBtn.addEventListener("click",function(){remove(value.id);});
-            	   	add.appendChild(removeBtn);
-            	   	var div =document.createElement("div");
-            	   	var linebreak= document.createElement("br");
-            	   	div.appendChild(linebreak);
-					add.appendChild(div);
-					count++;
-	  	  });
-		 }
-		 }
-		 
-		 function delivery(number){
-			 var obj={"identity": number };
-			 var delivery = new cart("delivery");
-			 delivery.ajax(obj);
-			 window.location.href="delivery.jsp";
-		 }
-		 
-		 function remove(number){
-			 var obj={"identity": number };
-			 var remove = new cart("Cartremove");
-			 remove.ajax(obj);
-			 alert("Removed Succesfully");
-			 window.location.href="mycart.jsp";
-
-		 }
-
 		 function gSignOut() {
 		      var auth2 = gapi.auth2.getAuthInstance();
 		      auth2.signOut().then(function () {
@@ -200,7 +204,7 @@ function call(){
 		        window.location.href='logout.jsp';
 		      });
 		    }
-call();
+		 call();
 </script>
 
 </html>

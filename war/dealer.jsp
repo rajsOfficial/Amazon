@@ -63,7 +63,7 @@
 <br>
 
 <div id="dealerlogin" class="container">
-	<form method="post" id="loginform" class="form-horizontal"  onsubmit="loginSub()">
+	<form action="DealerProfile.jsp" method="post" id="loginform" class="form-horizontal"  onsubmit="return loginSub()">
 		<div class="form-group">
 			<label class="control-label col-sm-5" for="email">Email: </label>
 			<div class="col-sm-3">
@@ -90,7 +90,7 @@
 <h4 align="center">SignUp</h4>
 <br>
 <div id="signup" class="container">
-	<form  method="post"  class="form-horizontal" onsubmit="signupSub()">
+	<form action="DealerProfile.jsp" method="post"  class="form-horizontal" onsubmit="return signupSub()">
 		<div class="form-group">
 			<label class="control-label col-sm-5" for="dealername">DealerName:
 			</label>
@@ -132,16 +132,15 @@
 <script>
 
 
-var authenticate = function(url) {
-		this.Url = url;
+var authenticate = function() {
+		this.method = "post";
 	};
 	
-authenticate.prototype.ajax = function(data){
-
-		console.log(this.Url);
+authenticate.prototype={
+	ajax :  function(data,Url){
 		$.ajax({
 			type : "post",
-			url : this.Url,
+			url : Url,
 			headers : {
 				'Accept' : 'Application/json',
 				'Content-Type' : 'Application/json'
@@ -152,25 +151,19 @@ authenticate.prototype.ajax = function(data){
 					window.location.href = "DealerProfile.jsp";
 				} else {
 					alert(json.ans);
-					return false;
 				}
 			}
 		});
-	}
-	
-	function loginSub() {
-
+	},
+	 login : function() {
 		var obj = {
 			"email" : $("#email").val(),
 			"password" : $("#pwd").val()
 		};
 		var data = JSON.stringify(obj);
-		var login = new authenticate("DealerLogin");
-		login.ajax(data);
-		return false;
-	}
-
-	function signupSub() {
+		this.ajax(data,"DealerLogin");
+	},
+	signup : function() {
 		var obj = {
 			"email" : $("#emailsignup").val(),
 			"pwd" : $("#pwdsignup").val(),
@@ -178,10 +171,21 @@ authenticate.prototype.ajax = function(data){
 			"number" : $("#number").val()
 		};
 		var data = JSON.stringify(obj);
-		var signup = new authenticate("DealerSignup");
-		signup.ajax(data);
-		return false;
+		this.ajax(data,"DealerSignup");
 	}
+}	
+
+function loginSub(){
+		var loginObj = new authenticate();
+		loginObj.login();
+		return false;
+}
+
+function signupSub() {
+	var signupObj = new authenticate();
+	signupObj.signup();
+	return false;
+}
 </script>
 
 </html>

@@ -90,7 +90,7 @@ div.one {
 			<div id="loginform" class="panel-body">
 				<h4 align="center">Login</h4>
 				<form method="post" id="Loginform" class="form-horizontal"
-					style="display: block" onsubmit="login()">
+					style="display: block" onsubmit="return loginSub()">
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="email">Email :
 						</label>
@@ -120,7 +120,7 @@ div.one {
 				<h4 align="center">SignUp</h4>
 				<div class="container">
 					<form method="post" id="Signupform" class="form-horizontal"
-						onsubmit="signUp()">
+						onsubmit="return signupSub()">
 						<div class="form-group">
 
 							<br> <label class="control-label col-sm-2" for="fname">FirstName:
@@ -190,33 +190,32 @@ div.one {
 </div>
 <script>
 
-var authenticate =function(url){
+var authenticate =function(){
 	this.method = "post";
-	this.Url = url;
 }
 
-authenticate.prototype.ajax = function(data){
-console.log(this.Url);
-	 $.ajax({
-		 type:"Post",
-		 url: this.Url,
-			headers : {
-				'Accept':'Application/json',
-				'Content-Type' : 'Application/json'
-			},
-			data : data,
-			success : function(json) {
-				if (json.ans == "Good") {
-					window.location.href = "UserProfile.jsp";
-				} else {
-					alert(json.ans);
-					return false;
+authenticate.prototype = {
+
+	ajax : function(data,Url){
+		$.ajax({
+			 type:"Post",
+			 url: Url,
+				headers : {
+					'Accept':'Application/json',
+					'Content-Type' : 'Application/json'
+				},
+				data : data,
+				success : function(json) {
+					if (json.ans == "Good") {
+						window.location.href = "UserProfile.jsp";
+					} else {
+						alert(json.ans);
+					}
 				}
-			}
-			});
-}
+				});
+	},
 	
-	function onSignIn(googleUser){
+	 SignIn : function(googleUser){
 		var id_token = googleUser.getAuthResponse().id_token;
 	    var profile = googleUser.getBasicProfile();
 		var obj= {"idtoken": id_token,
@@ -226,24 +225,21 @@ console.log(this.Url);
 		  "Email" : profile.getEmail()
 		};
 		  var data = JSON.stringify(obj);
-		  var gSignin  = new authenticate("UserGoogleLogin");
-		  gSignin.ajax(data);
-	}
+		  this.ajax(data,"UserGoogleLogin");
+	},
 
 	
-	function login(){
+	 login : function(){
 		var obj = {
 				"email" : $("#email").val(),
 				"password" : $("#pwd").val()
 			};
 		var data = JSON.stringify(obj);
-		var login = new authenticate("UserLogin");
-		login.ajax(data);
-	}
+		this.ajax(data,"UserLogin");
+	},
 	
 	
-	function signUp (){
-		
+	 signUp : function(){
 		var obj = {
 			"email" : $("#emailsignup").val(),
 			"pwd" : $("#pwdsignup").val(),
@@ -252,18 +248,17 @@ console.log(this.Url);
 			"number" : $("#number").val()
 		};
 		var data = JSON.stringify(obj);
-		var signup = new authenticate("UserSignup");
-		signup.ajax(data);
-	}
+		signup.ajax(data,"UserSignup");
+	},
 	
-	 function signOut(){
+	  signOut : function(){
 		 var auth2 = gapi.auth2.getAuthInstance();
 		  auth2.signOut().then(function () {
-		    console.log('User signed out.');
 		    window.location.href="logout.jsp";
 		  });
 	 } 
-	 
+}
+
 $(document).ready(function() {
 	$("#login").click(function() {
 		document.getElementById("loginform").style.display = "block";
@@ -276,5 +271,26 @@ $(document).ready(function() {
 	});
 });
 
+function loginSub(){
+	var loginObj = new authenticate();
+	loginObj.login();
+	return false;
+	}
+
+function signupSub(){
+	var signupObj = new authenticate();
+	signupObj.signUp();
+	return false;
+	}
+
+function onSignIn(googleUser){
+	var gSignin  = new authenticate();
+	gSignin.SignIn();
+}
+
+function signOut(){
+	var signoutObj = new authenticate();
+	signoutObj.signOut();
+}
 </script>
 </html>

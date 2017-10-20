@@ -66,24 +66,26 @@
 
 
 <script>
-var module = (function (){
-	function validate(){
-		var Email = $("#email").val();
-		var Pwd = $("#pwd").val();
-		if (Email == "admin@full.co" && Pwd == "admin") {
-			return true;
-		} else {
-			alert("Please Enter Valid Details");
-			return false;
+var authenticate = function (){
+};
+
+authenticate.prototype = {
+		validate : function(){
+			var Email = $("#email").val();
+			var Pwd = $("#pwd").val();
+			if (Email == "admin@full.co" && Pwd == "admin") {
+				return true;
+			} else {
+				alert("Please Enter Valid Details");
+				return false;
+			}
 		}
-	}
-	return {
-		validator : validate
-	};
-})();	
-	$(document).ready(function(){
+};
+
+$(document).ready(function(){
 		$('#signIn').submit(function() {
-			return module.validator();
+			var signInObj = new authenticate();
+			return authenticate.validate();
 		});
 	});
 	

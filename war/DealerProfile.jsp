@@ -62,15 +62,15 @@ response.setHeader("Expires", "0");
 
 <h3 align="center">Products Delivered By You</h3>
 <script type="text/javascript">
-function authenticate(url){
-	this.url = url ;
-	this.method= "post";
-	this.contentType = "Text/Plain";
-	
+var authenticate = function(url){
+	this.Url = url ;
 }
-authenticate.prototype.calling = function(){
-	  $.ajax({
-			url: "/DealerProfile",
+
+authenticate.prototype = {
+	
+	calling : function(){
+	$.ajax({
+			url: this.Url,
 			type :"POST",
 			headers : {
 				'Accept':'Application/json',
@@ -79,18 +79,16 @@ authenticate.prototype.calling = function(){
 			data : "",
 			contentType : "Text/plain",
 			success : function(response) {
-				run(response);
+				authenticate.prototype.run(response);
 			},
 			error : function() {
 				  alert('Error while request..');
 				}
 	  });
-}
+},
 
-var ajax = new authenticate("DealerProfile","");
-var result=ajax.calling();
 
-function run(result){
+ run : function(result){
 	 $.each(result, function (index, value) {
     	 var cell, row, table;
     	    table = document.createElement('table');
@@ -128,6 +126,9 @@ function run(result){
     	    document.getElementById("addtable").appendChild(table);
 });
 }
+}
+var ajax = new authenticate("DealerProfile");
+ajax.calling();
 </script>
 					<div id="addtable" align="center">
  <h3 id="show"></h3></div>

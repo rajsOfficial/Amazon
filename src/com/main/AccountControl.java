@@ -284,15 +284,14 @@ public class AccountControl {
 	
 	
 	
-	@RequestMapping("/cartAdd")
-	public @ResponseBody String cartAdd(HttpServletRequest req, HttpServletResponse res)
+	@RequestMapping(value="/cartAdd",method= RequestMethod.POST)
+	public @ResponseBody String cartAdd(@RequestBody String cartDetails,HttpServletRequest req, HttpServletResponse res)
 			throws IOException, JSONException {
 
-		JSONObject jsonobj = new JSONObject(req.getParameter("jsonObj"));
-		long index = 0;
-		if (jsonobj.has("identity")) {
-			index = Long.parseLong(jsonobj.getString("identity"));
-		}
+		ObjectMapper objectmapper = new ObjectMapper();
+		Map<String, Object> map1 = objectmapper.readValue(cartDetails, new TypeReference<Map<String, Object>>() {
+		});
+		long index = (long) map1.get("identity");
 		HttpSession htpSes = req.getSession();
 		String email = (String) htpSes.getAttribute("useremail");
 
