@@ -285,7 +285,7 @@ function signupSub(){
 
 function onSignIn(googleUser){
 	var gSignin  = new authenticate();
-	gSignin.SignIn();
+	gSignin.SignIn(googleUser);
 }
 
 function signOut(){

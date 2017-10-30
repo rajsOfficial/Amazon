@@ -93,16 +93,15 @@ td, th {
 
 var productValues = 0;
 
-
 var details = function(url){
  	this.method = "post";
  	this.Url = url;
  };
  
 details.prototype = {
-	ajax : function(data){
+	ajax : function(data,Url){
 	$.ajax({
-			url: this.Url,
+			url: Url,
 			type :this.method,
 			headers : {
 				'Accept':'Application/json',
@@ -111,8 +110,8 @@ details.prototype = {
 			data : data,
 			contentType : "Text/plain",
 			success : function(response) {
-					productValues =response;
-	       			run();
+				productValues = response;
+					details.prototype.run();
 			},
 			error : function() {
 			  alert('Error while request..');
@@ -199,7 +198,7 @@ details.prototype = {
 	  	var btn = document.createElement("Button");
 	   	btn.setAttribute("class","btn btn-primary");
 	   	btn.innerHTML="Buy";
-		   	btn.onclick= function(){deliveryOut();};
+		   	btn.onclick= function(){details.prototype.deliveryOut();};
 		   	
 	   	add.appendChild(btn);
 	 	add.appendChild(br);
@@ -219,7 +218,7 @@ var deliveryDetails = new details();
 deliveryDetails.ajax("","deliveryPage");
 
 function gSignOut(){
-	var signOutObj = new authenticate():
+	var signOutObj = new details();
 		signOutObj.signOut();
 }
 

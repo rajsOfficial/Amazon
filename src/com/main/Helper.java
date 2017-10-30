@@ -83,14 +83,14 @@ public class Helper<T> {
 		else if(action.equals("add")){
 			up.getCartid().add(index);
 			DAO.makePersist("user", up);
-			return "Added to Cart";
+			return new ObjectMapper().writeValueAsString("Added To Cart");
 		}
 		
 		
 		else if(action.equals("remove")){
 			up.getCartid().remove(index);
 			DAO.makePersist("user", up);
-			return null;
+			return new ObjectMapper().writeValueAsString("Removed From Cart");
 		}
 		return "";
 	}

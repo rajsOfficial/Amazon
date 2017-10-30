@@ -10,12 +10,12 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.GenericData;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import javax.cache.CacheException;
@@ -36,7 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AccountControl {
 	private static final HttpTransport UrlFetchTransport = null;
-
+	ObjectMapper objectmapper = new ObjectMapper();
 	/*
 	 * long userCount =0; long proposalCount=0; long deliveryCount=0; long
 	 * totalAmount=0; long totalDiscount=0;
@@ -53,7 +53,6 @@ public class AccountControl {
 	@RequestMapping(value="/UserSignup",method=RequestMethod.POST)
 	public String UserSignp(@RequestBody String signup,HttpServletRequest  req, HttpServletResponse res) throws IOException{
 		
-		ObjectMapper objectmapper = new ObjectMapper();
 		Map<String, Object> map1 = objectmapper.readValue(signup, new TypeReference<Map<String, Object>>() {
 		});
 
@@ -62,8 +61,8 @@ public class AccountControl {
 		String fname=(String) map1.get("fname");
 		String lname=(String) map1.get("lname");
 		long number= Long.parseLong((String) map1.get("number"));
-		
-		 return helpObj.userSignUp(fname,lname,email,number,password);
+		Map<String, String> map = new HashMap<>();
+		return objectmapper.writeValueAsString(map.put("ans",helpObj.userSignUp(fname,lname,email,number,password)));
 		 
 	}
 	
@@ -72,7 +71,6 @@ public class AccountControl {
 	public String useracc(@RequestBody String login, HttpServletRequest req, HttpServletResponse res)
 			throws JSONException, CacheException, IOException {
 
-		ObjectMapper objectmapper = new ObjectMapper();
 		Map<String, String> map = new HashMap<>();
 		Map<String, Object> map1 = objectmapper.readValue(login, new TypeReference<Map<String, Object>>() {
 		});
@@ -98,7 +96,6 @@ public class AccountControl {
 		/*HttpTransport httpTransport = new NetHttpTransport();
 		JacksonFactory jacksonFactory = new JacksonFactory();
 */
-		ObjectMapper objectmapper = new ObjectMapper();
 		Map<String, String> map = new HashMap<>();
 		Map<String, Object> map1 = objectmapper.readValue(login, new TypeReference<Map<String, Object>>() {
 		});
@@ -139,18 +136,18 @@ public class AccountControl {
 	}
 
 	@RequestMapping(value="/DealerSignup", method=RequestMethod.POST)
-	public String DealerSignp(@RequestBody String signup,HttpServletRequest req, HttpServletResponse res) throws IOException{
+	@ResponseBody
+	public String DealerSignup(@RequestBody String signup,HttpServletRequest req, HttpServletResponse res) throws IOException{
 		
-		ObjectMapper objectmapper = new ObjectMapper();
+	
 		Map<String, Object> map1 = objectmapper.readValue(signup, new TypeReference<Map<String, Object>>() {
 		});
-
 		String email=(String)map1.get("email");
 		String password =(String)map1.get("pwd");
 		String dname=(String)map1.get("dealername");
 		long number= Long.parseLong((String)map1.get("number"));
 		
-		 return helpObj.dealerSignUp(dname,email,number,password);
+		 return objectmapper.writeValueAsString(helpObj.dealerSignUp(dname,email,number,password));
 	}
 	
 	
@@ -159,9 +156,6 @@ public class AccountControl {
 	@ResponseBody
 	public String dealeracc(@RequestBody String dlogin, HttpServletRequest req, HttpServletResponse res)
 			throws JsonParseException, IOException, JsonMappingException, JSONException, CacheException {
-
-		ObjectMapper objectmapper = new ObjectMapper();
-		Map<String, String> map = new HashMap<>();
 
 		Map<String, Object> map1 = objectmapper.readValue(dlogin, new TypeReference<Map<String, Object>>() {
 		});
@@ -173,8 +167,7 @@ public class AccountControl {
 			HttpSession htp = req.getSession();
 			htp.setAttribute("dealeremail", email);
 		}
-		map.put("ans", ans);
-		return objectmapper.writeValueAsString(map);
+		return objectmapper.writeValueAsString(ans);
 	}
 
 	
@@ -207,7 +200,7 @@ public class AccountControl {
 	@RequestMapping(value = "/proposal", method = RequestMethod.POST)
 	public @ResponseBody String proposal(@RequestBody String proposed, HttpServletRequest req, HttpServletResponse res)
 			throws IOException, JSONException {
-		ObjectMapper objectmapper = new ObjectMapper();
+		System.out.println("into proposal");
 		Map<String, Object> map1 = objectmapper.readValue(proposed, new TypeReference<Map<String, Object>>() {
 		});
 
@@ -288,7 +281,6 @@ public class AccountControl {
 	public @ResponseBody String cartAdd(@RequestBody String cartDetails,HttpServletRequest req, HttpServletResponse res)
 			throws IOException, JSONException {
 
-		ObjectMapper objectmapper = new ObjectMapper();
 		Map<String, Object> map1 = objectmapper.readValue(cartDetails, new TypeReference<Map<String, Object>>() {
 		});
 		long index = (long) map1.get("identity");
@@ -370,12 +362,11 @@ public class AccountControl {
 	public @ResponseBody String buyProduct(@RequestBody String product ,HttpServletRequest req, HttpServletResponse res)
 			throws IOException, NumberFormatException, JSONException, ServletException {
 
-		ObjectMapper objectmapper = new ObjectMapper();
 		Map<String, Object> map1 = objectmapper.readValue(product, new TypeReference<Map<String, Object>>() {
 		});
 		String quan = (String)map1.get("quan");
-		String id = (String)map1.get("identity");
-		String phNumber= (String)map1.get("mobileNum");
+		String id = String.valueOf((long)map1.get("identity"));
+		String phNumber= String.valueOf((long)map1.get("mobileNum"));
 		String addr = (String)map1.get("addr");
 		HttpSession httpses =req.getSession(false);
 		String email = (String) httpses.getAttribute("useremail");
@@ -448,7 +439,6 @@ public class AccountControl {
 		helpObj.taskHandler();
 	}
 
-	
 	
 	
 	

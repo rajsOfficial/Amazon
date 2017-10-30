@@ -115,7 +115,7 @@ authenticate.prototype = {
 	},
 	
 	run : function(){
-			  if(typeof productValues.obj1 === "undefined"){
+			  if(typeof productValues.obj0 === "undefined"){
 					var h3 = document.createElement('h3');
 					var t1 =document.createTextNode("Nothing to display");
 					h3.appendChild(t1);
@@ -164,7 +164,7 @@ authenticate.prototype = {
             	   	btn.innerHTML="Add to Cart";
             	   	btn.setAttribute("value",value.id);
             	   	btn.setAttribute("id","btn");
-            	   	btn.addEventListener("click",function(){authenticate.prototype.validation(value.id);});
+            	   	btn.addEventListener("click",function(){authenticate.prototype.cartAdd(value.id);});
             	   	
             	   	add.appendChild(btn);
             	   	var div =document.createElement("div");
@@ -175,21 +175,21 @@ authenticate.prototype = {
 	         }
 		 },
 		 
-	validation : function(number){
+	cartAdd : function(number){
 			 var obj={"identity": number };
 			 var data =JSON.stringify(obj);
 			 authenticate.prototype.ajax(data,"cartAdd");			 
 			 alert("Added to Cart ");
 		 },
 		
-		    function signOut() {
+	signOut : function() {
 		      var auth2 = gapi.auth2.getAuthInstance();
 		      auth2.signOut().then(function () {
 		        console.log('User signed out.');
 		        window.location.href='logout.jsp';
 		      });
 		    }
-	
+}
 
 	
 	function gSignOut(){

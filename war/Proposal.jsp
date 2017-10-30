@@ -63,7 +63,7 @@ response.setHeader("Expires", "0");
 
 
 <div id="proposal" class="container">
-	<form class="form-horizontal" id="formProposal">
+	<form class="form-horizontal" method="post" id="formProposal">
 		<div class="form-group">
 			<label class="control-label col-sm-5" for="productName">ProductName:
 			</label>
@@ -99,7 +99,11 @@ response.setHeader("Expires", "0");
 </div>
 
 <script>
-var ajax_Call = {
+var ajax_Call= function(){
+	this.method = "post";
+};
+
+ajax_Call.prototype = {
 		validation : function (){
 			var pName = $('#productName').val();
 			var price = $('#price').val();
@@ -107,37 +111,37 @@ var ajax_Call = {
 			var disc = $('#discount').val();
 			
 			if(price<10000000 && quan<100000 && disc<100){
-				
-				var xhr = new XMLHttpRequest();
-				var url = "proposal";
-				xhr.open("POST", url, true);
-				xhr.setRequestHeader("Content-type", "application/json");
-				xhr.onreadystatechange = function() {
-					 if (xhr.readyState == 4 && xhr.status == 200) {
-						alert("Send to Admin for Approval");
-					}
-					else{
-						alert('Send to Admin for Approval');
-					}
-				}
 				var obj = {
 						"productName" : pName,
 						"price" : price,
 						"quantity" : quan,
 						"discount" : disc	};
 				var data = JSON.stringify(obj);
-				xhr.send(data);
-	}
-	else{
-		alert("Please Provide Valid Details");
-	}
-		}
+				 $.ajax({
+						url:  "proposal",
+						type :"post",
+						headers : {
+							'Content-Type' : 'Application/json'
+						},
+						data : data,
+						success : function(response) {
+							alert("Send to Admin for Approval");
+						},
+						error : function() {
+						  alert('Error while request..');
+						}
+					});
+			}
+			else{
+				alert("Please Provide Valid Details");
+			}
+				}
 };
 
 $(document).ready(function(){
 	$("#proposalbut").click(function(){
-	var dataObj  = new ajax_Call;
-	ajax_Call.validate();
+	var dataObj  = new ajax_Call();
+	dataObj.validation();
 	});
 });
 </script>

@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-  <div class="container-fluid">
+<div class="container-fluid">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
    		 <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -44,7 +44,8 @@
  <h3 id="show"></h3></div>
 <script type="text/javascript">
 	
-	var productValues = 0;
+var productValues = 0;
+
 var authenticate = function(){
 	this.method = "get";
 }
@@ -71,7 +72,7 @@ authenticate.prototype ={
 	 },
 	
 	 run : function(){	
-			 if(typeof productValues.obj1 === "undefined"){
+			 if(typeof productValues.obj0 === "undefined"){
 				var h3 = document.createElement('h3');
 				var t1 =document.createTextNode("Nothing to display");
 				h3.appendChild(t1);
@@ -151,7 +152,7 @@ authenticate.prototype ={
 			 window.location.href="AdminProfile.jsp";
 		 },
 		 
-	 rejectAll : function(){
+		 rejectAll : function(){
 			authenticate.prototype.ajax("","taskReject");
 			alert("success");
 			window.location.href="AdminProfile.jsp";
@@ -163,8 +164,8 @@ authenticate.prototype ={
 			clear.rejectAll();
 	});  });
 
-var data = new authenticate("AdminProfile");
-data.ajax("");
+var data = new authenticate();
+data.ajax("","AdminProfile");
 
 
 </script><br>

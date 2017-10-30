@@ -147,10 +147,10 @@ authenticate.prototype={
 			},
 			data : data,
 			success : function(json) {
-				if (json.ans == "Good") {
+				if (json == "Good") {
 					window.location.href = "DealerProfile.jsp";
 				} else {
-					alert(json.ans);
+					alert(json);
 				}
 			}
 		});

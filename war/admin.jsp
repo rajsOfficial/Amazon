@@ -37,7 +37,7 @@
 <br>
 <br><br>
 <div class="container">
-	<form id="signIn" class="form-horizontal" action="AdminProfile.jsp" method="Post">
+	<form class="form-horizontal" action="AdminProfile.jsp" method="Post" onsubmit="return login()" >
 		<div class="form-group">
 			<label class="control-label col-sm-5" for="email">Email: </label>
 			<div class="col-sm-3">
@@ -67,6 +67,7 @@
 
 <script>
 var authenticate = function (){
+	var check = false;
 };
 
 authenticate.prototype = {
@@ -82,12 +83,10 @@ authenticate.prototype = {
 		}
 };
 
-$(document).ready(function(){
-		$('#signIn').submit(function() {
+	function login() {
 			var signInObj = new authenticate();
-			return authenticate.validate();
-		});
-	});
+			return signInObj.validate();
+	}
 	
 </script>
 
