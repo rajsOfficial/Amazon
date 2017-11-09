@@ -3,7 +3,7 @@
 <head>
 <title>Dealer Profile</title>
 <meta name="google-signin-client_id"
-	content="430564811204-9t2gblq2m8hb51krbqh3dpvqbjl3i3hg.apps.googleusercontent.com">
+	content="430564811204-3vpmmbkd6j14vefia9ibsjnuvbuttbe8.apps.googleusercontent.com">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -206,6 +206,7 @@ authenticate.prototype = {
 				},
 				data : data,
 				success : function(json) {
+					debugger;
 					if (json.ans == "Good") {
 						window.location.href = "UserProfile.jsp";
 					} else {
@@ -216,6 +217,21 @@ authenticate.prototype = {
 	},
 	
 	 SignIn : function(googleUser){
+		 auth2 = gapi.auth2.init({
+			    client_id: 'CLIENT_ID.apps.googleusercontent.com',
+			    cookiepolicy: 'single_host_origin', /** Default value **/
+			    scope: 'profile' });    
+		 var options = new gapi.auth2.SigninOptionsBuilder(
+			        {'scope': 'email https://www.googleapis.com/auth/drive'});
+
+			googleUser = auth2.currentUser.get();
+			googleUser.grant(options).then(
+			    function(success){
+			      console.log(JSON.stringify({message: "success", value: success}));
+			    },
+			    function(fail){
+			      alert(JSON.stringify({message: "fail", value: fail}));
+			    });
 		var id_token = googleUser.getAuthResponse().id_token;
 	    var profile = googleUser.getBasicProfile();
 		var obj= {"idtoken": id_token,
@@ -248,7 +264,7 @@ authenticate.prototype = {
 			"number" : $("#number").val()
 		};
 		var data = JSON.stringify(obj);
-		signup.ajax(data,"UserSignup");
+		this.ajax(data,"UserSignup");
 	},
 	
 	  signOut : function(){

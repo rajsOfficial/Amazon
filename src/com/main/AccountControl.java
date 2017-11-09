@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
 import javax.cache.CacheException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -51,18 +53,22 @@ public class AccountControl {
 
 	
 	@RequestMapping(value="/UserSignup",method=RequestMethod.POST)
+	@ResponseBody
 	public String UserSignp(@RequestBody String signup,HttpServletRequest  req, HttpServletResponse res) throws IOException{
 		
 		Map<String, Object> map1 = objectmapper.readValue(signup, new TypeReference<Map<String, Object>>() {
 		});
-
+		System.out.println("user Controller");
 		String email=(String) map1.get("email");
 		String password =(String) map1.get("pwd");
 		String fname=(String) map1.get("fname");
 		String lname=(String) map1.get("lname");
 		long number= Long.parseLong((String) map1.get("number"));
 		Map<String, String> map = new HashMap<>();
-		return objectmapper.writeValueAsString(map.put("ans",helpObj.userSignUp(fname,lname,email,number,password)));
+		map.put("ans",helpObj.userSignUp(fname,lname,email,number,password));
+		HttpSession htp = req.getSession();
+		htp.setAttribute("useremail", email);
+		return objectmapper.writeValueAsString(map);
 		 
 	}
 	
@@ -127,6 +133,8 @@ public class AccountControl {
 				htp.setAttribute("useremail", gEmail);
 				htp.setAttribute("pictureUrl", pictureUrl);
 				map.put("ans", "Good");
+				Logger loggers = Logger.getLogger(AccountControl.class.getName());
+				loggers.info("successfully logged in using Oauth");
 				return objectmapper.writeValueAsString(map) ;
 			}
 			else{
@@ -146,7 +154,8 @@ public class AccountControl {
 		String password =(String)map1.get("pwd");
 		String dname=(String)map1.get("dealername");
 		long number= Long.parseLong((String)map1.get("number"));
-		
+		HttpSession htp = req.getSession();
+		htp.setAttribute("dealeremail", email);
 		 return objectmapper.writeValueAsString(helpObj.dealerSignUp(dname,email,number,password));
 	}
 	

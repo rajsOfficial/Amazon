@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>User Profile</title>
-<meta name="google-signin-client_id" content="430564811204-9t2gblq2m8hb51krbqh3dpvqbjl3i3hg.apps.googleusercontent.com">
+<meta name="google-signin-client_id" content="430564811204-3vpmmbkd6j14vefia9ibsjnuvbuttbe8.apps.googleusercontent.com">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

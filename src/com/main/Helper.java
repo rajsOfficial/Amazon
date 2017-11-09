@@ -22,23 +22,23 @@ public class Helper<T> {
     List<ProductPojo> proposedList;
 	 protected String checkLogin(String x,String email,String password) throws CacheException{
 	
-			List<T> ls=null;
+			UserPojo Userobj=null;
 			String pwd = null ;
 			
 			if(x.equals("user")){
-				ls = DAO.dataAccess_User(email);
-				if (ls.isEmpty()) {
+				Userobj = DAO.dataAccess_UserById(email);
+				if (Userobj == null) {
 					return  "Email id is not present.";
 				}
-				pwd=((UserPojo) ls.get(0)).getPassword();
+				pwd=Userobj.getPassword();
 			}
 			
 			if(x.equals("dealer")){
-				ls = DAO.dataAccess_Dealer(email);
-				if (ls.isEmpty()) {
+				DealerPojo obj = DAO.dataAccess_DealerById(email);
+				if (obj == null) {
 					return  "Email id is not present.";
 				}
-				pwd=((DealerPojo) ls.get(0)).getPassword();
+				pwd=obj.getPassword();
 			}
 
 			if (pwd.equals(password)) {
@@ -64,9 +64,7 @@ public class Helper<T> {
 	
 	protected String cart_Helper(String action,String email,long index) throws JsonProcessingException{
 		
-		List<T> ls=null;
-		ls = DAO.dataAccess_User(email);
-		UserPojo up = (UserPojo) ls.get(0);
+		UserPojo up = DAO.dataAccess_UserById(email);;
 		Map<String,ProductPojo> map1 = new HashMap<>();
 		
 		if (action.equals("show")) {
@@ -183,8 +181,8 @@ public class Helper<T> {
 	
 	protected boolean googleLogin(String gEmail, String name) throws JsonProcessingException{
 
-			List<UserPojo> ls = DAO.dataAccess_User(gEmail);
-			if(ls.isEmpty()){
+			UserPojo ls = DAO.dataAccess_UserById(gEmail);
+			if(ls == null){
 				UserPojo userObj = new UserPojo();
 				userObj.setEmail(gEmail);
 				userObj.setFirstname(name);
@@ -198,8 +196,10 @@ public class Helper<T> {
 	protected String userSignUp(String fname, String lname, String email, long number, String password) {
 		
 		String response ;
-		List<UserPojo> ls = DAO.dataAccess_User(email);
-			if(ls.isEmpty()){
+		UserPojo obj = DAO.dataAccess_UserById(email);
+		System.out.println("user Obj "+obj);
+			if(String.valueOf(obj) =="null"){
+				System.out.println("into the user signup");
 				if(number>=1000000000 && number <= 9999999999L){
 					
 					DAO.userPersist(fname,lname,email,number,password);
@@ -218,8 +218,10 @@ public class Helper<T> {
 protected String dealerSignUp(String name, String email, long number, String password) {
 	
 	String response ;
-	List<UserPojo> ls = DAO.dataAccess_Dealer(email);
-		if(ls.isEmpty()){
+	DealerPojo ls = DAO.dataAccess_DealerById(email);
+	System.out.println("dealer Obj "+ls);
+		if(ls == null){
+			System.out.println("into the dealer signup");
 			if(number>=1000000000 && number <= 9999999999L){
 				
 				DAO.dealerPersist(name,email,number,password);

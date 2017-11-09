@@ -2,6 +2,7 @@ package com.main;
 
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class DealerPojo {
@@ -11,6 +12,7 @@ public class DealerPojo {
 	@Persistent
 	private long number;
 	@Persistent
+	@PrimaryKey
 	private String email;
 	@Persistent
 	private String password;

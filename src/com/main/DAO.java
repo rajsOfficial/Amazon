@@ -42,6 +42,24 @@ public class DAO {
 				tx.rollback();
 		}
 	}
+	
+	protected static DealerPojo dataAccess_DealerById(String email) {
+		try{
+		return pm.getObjectById(DealerPojo.class, email);
+	}
+	catch(Exception e){
+		return null;
+	}
+}
+
+	protected static UserPojo dataAccess_UserById(String email) {
+		try{
+		return pm.getObjectById(UserPojo.class, email);
+		}
+		catch(Exception e){
+			return null;
+		}
+}
 
 	@SuppressWarnings("unchecked")
 	protected static List dataAccess_Profile(String field, String cond) {

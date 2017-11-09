@@ -3,6 +3,7 @@ package com.main;
 import java.util.Set;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class UserPojo {
@@ -13,6 +14,7 @@ public class UserPojo {
 	@Persistent
 	private String lastname;
 	@Persistent
+	@PrimaryKey
 	private String email;
 	@Persistent
 	private long number;
