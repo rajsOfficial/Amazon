@@ -12,6 +12,9 @@
 			<attribute name="javadoc_location" value="file:/C:/Users/user.FULL305-WIN/Desktop/eclipse/plugins/com.google.appengine.eclipse.sdkbundle_1.9.34/appengine-java-sdk-1.9.34/docs/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-services-calendar-v3-rev264-java-1.23.0/calendar/google-api-services-calendar-v3-rev264-1.23.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-services-calendar-v3-rev264-java-1.23.0/calendar/google-api-services-calendar-v3-rev264-1.23.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/google-api-services-calendar-v3-rev264-java-1.23.0/calendar/google-api-services-calendar-v3-rev264-1.23.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/com.fasterxml.jackson.core.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user.FULL305-WIN/Downloads/Json_Ajax_Jquery_Jackson/com.fasterxml.jackson.databind.jar"/>
